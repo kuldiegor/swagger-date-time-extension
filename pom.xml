@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.kuldiegor</groupId>
+    <artifactId>swagger-date-time-extension-spring-boot-starter</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+
+    <name>swagger-date-time-extension</name>
+    <description>Библиотека - дополнение для swagger библиотеки.</description>
+    <url>https://github.com/kuldiegor/swagger-date-time-extension</url>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Dmitrij Kulabuhov</name>
+            <email>support@kuldiegor.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:kuldiegor/swagger-date-time-extension.git</connection>
+        <developerConnection>scm:git:git@github.com:kuldiegor/swagger-date-time-extension.git</developerConnection>
+        <url>https://github.com/kuldiegor/swagger-date-time-extension</url>
+    </scm>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <swagger-version>2.2.19</swagger-version>
+        <spring-boot.version>3.1.0</spring-boot.version>
+        <maven-compiler-plugin.version>3.10.0</maven-compiler-plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure-processor</artifactId>
+            <version>${spring-boot.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-core-jakarta</artifactId>
+            <version>${swagger-version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
