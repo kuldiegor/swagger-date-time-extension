@@ -20,18 +20,29 @@ import io.swagger.v3.core.converter.ModelConverters;
 import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.models.OpenAPI;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class Config {
 
-    @Bean
-    @ConditionalOnBean(value = {OpenAPI.class})
-    public void configureModules(){
+    private void configureModules() {
         ObjectMapper objectMapper = Json.mapper();
         objectMapper.registerModule(new DeserializationModule());
         ModelConverters modelConverters = ModelConverters.getInstance();
         modelConverters.addConverter(new DateTimeModelResolver(objectMapper));
+    }
+
+    @Bean
+    @ConditionalOnBean(value = {OpenAPI.class})
+    public void configureModulesOnBean(){
+        configureModules();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(value = {OpenAPI.class})
+    public void configureModulesOnMissingBean(){
+        configureModules();
     }
 }
