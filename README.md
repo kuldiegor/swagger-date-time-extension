@@ -3,17 +3,6 @@
 
 Библиотека позволяет автоматически добавить формат и примеры, по формату даты времени, для полей даты времени.
 
-## Установка
-Для того что бы использовать библиотеку, нужно сначала её установить.
-
-Сначала клонируем репозиторий
-
-`git clone https://github.com/kuldiegor/swagger-date-time-extension.git`
-
-Затем установим библиотеку локально
-
-`mvn install`
-
 ## Использование
 Чтобы использовать библиотеку, достаточно подключить её в зависимости проекта.
 
@@ -21,7 +10,7 @@
 <dependency>
     <groupId>com.kuldiegor</groupId>
     <artifactId>swagger-date-time-extension-spring-boot-starter</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
