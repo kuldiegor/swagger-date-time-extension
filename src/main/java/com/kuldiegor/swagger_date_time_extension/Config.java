@@ -27,22 +27,44 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Config {
 
-    private void configureModules() {
+    private void configureModules(DateTimeModelResolver dateTimeModelResolver) {
+        if (dateTimeModelResolver==null){
+            ObjectMapper objectMapper = Json.mapper();
+            dateTimeModelResolver = new DateTimeModelResolver(objectMapper,new QualifiedTypeNameResolver());
+        }
         ObjectMapper objectMapper = Json.mapper();
         objectMapper.registerModule(new DeserializationModule());
         ModelConverters modelConverters = ModelConverters.getInstance();
-        modelConverters.addConverter(new DateTimeModelResolver(objectMapper));
+        modelConverters.addConverter(dateTimeModelResolver);
+    }
+
+    @Bean
+    @ConditionalOnBean(value = {OpenAPI.class, DateTimeModelResolver.class})
+    public EmptyBean configureModulesWithOpenAPIAndResolver(DateTimeModelResolver dateTimeModelResolver){
+        configureModules(dateTimeModelResolver);
+        return EmptyBean.OpenAPIAndResolver;
     }
 
     @Bean
     @ConditionalOnBean(value = {OpenAPI.class})
-    public void configureModulesOnBean(){
-        configureModules();
+    @ConditionalOnMissingBean(value = {DateTimeModelResolver.class})
+    public EmptyBean configureModulesWithOpenAPIAndWithoutResolver(){
+        configureModules(null);
+        return EmptyBean.OpenAPIAndWithoutResolver;
     }
 
     @Bean
+    @ConditionalOnBean(value = {DateTimeModelResolver.class})
     @ConditionalOnMissingBean(value = {OpenAPI.class})
-    public void configureModulesOnMissingBean(){
-        configureModules();
+    public EmptyBean configureModulesWithResolverAndWithoutOpenAPI(DateTimeModelResolver dateTimeModelResolver){
+        configureModules(dateTimeModelResolver);
+        return EmptyBean.ResolverAndWithoutOpenAPI;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(value = {OpenAPI.class, DateTimeModelResolver.class})
+    public EmptyBean configureModulesWithoutOpenAPIAndResolver(){
+        configureModules(null);
+        return EmptyBean.WithoutOpenAPIAndResolver;
     }
 }

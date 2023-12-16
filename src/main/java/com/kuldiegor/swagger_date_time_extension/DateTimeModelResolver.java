@@ -22,6 +22,7 @@ import io.swagger.v3.core.converter.AnnotatedType;
 import io.swagger.v3.core.converter.ModelConverter;
 import io.swagger.v3.core.converter.ModelConverterContext;
 import io.swagger.v3.core.jackson.ModelResolver;
+import io.swagger.v3.core.jackson.TypeNameResolver;
 import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.models.media.Schema;
 
@@ -32,8 +33,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 public class DateTimeModelResolver extends ModelResolver {
-    public DateTimeModelResolver(ObjectMapper mapper) {
-        super(mapper, new QualifiedTypeNameResolver());
+    public DateTimeModelResolver(ObjectMapper mapper, TypeNameResolver typeNameResolver) {
+        super(mapper, typeNameResolver);
     }
 
     @Override
